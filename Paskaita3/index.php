@@ -18,7 +18,16 @@ print_r($arr_Weights);print('<br>');
 print_r($arr_Weights["Jonas"]); print('<br>');
 print_r(array_keys($arr_Weights));print('Masyvo key <br>');
 
-print('<br>');
+print('Visų reikšmių pasiekimas / išvardinimas → for()' . '<br>' . '<pre>');
+    for($i = 0; $i < count(array_keys($arr_Weights)); ++$i) {
+      // get assoc array key, using an index
+      // $arr_Weights[key]
+      // array_keys($arr_Weights) 
+      echo array_keys($arr_Weights)[$i] . '->' . $arr_Weights[array_keys($arr_Weights)[$i]] . ' ';
+    }
+    print('</pre><br>');
+
+
 // 2.1. min
 $minweight = min($arr_Weights);
 $key_min = array_search($minweight, $arr_Weights);
@@ -77,6 +86,19 @@ function test_odd($var)
   $my_array2=array(1,3,2,3,4);
 print_r(array_filter($my_array2,"test_odd"));
 print('<br>');
+
+$indexed_arr = ["Mindaugas", "Jonas", "Antanas", "Mantas"];
+$filtered_array = [];
+    for($i = 0; $i < count($indexed_arr); $i++){
+      // is the first letter equal to "M"
+      if(substr($indexed_arr[$i], 0, strlen("M")) === "M"){
+        array_push($filtered_array, $indexed_arr[$i]);
+      }
+    }
+    print("Filtered array:");
+    print_r($filtered_array);
+    print("<br>");
+
 
 echo(array_sum($my_array2));                           //Reikšmių suma
 print(' suma<br>');
