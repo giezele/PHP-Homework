@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Arrays</title>
+</head>
+<body>
 <?php
 // 2. Sukurkite asociatyvųjį masyvą, kuris reprezentuotų žmogų ir jo svorį ( “vardas1” => “svoris1”, “vardas2” => “svoris2” … ) ir:
 // 2.1. Raskite lengviausią žmogų (minimumas);
@@ -18,14 +26,25 @@ print_r($arr_Weights);print('<br>');
 print_r($arr_Weights["Jonas"]); print('<br>');
 print_r(array_keys($arr_Weights));print('Masyvo key <br>');
 
+// Jei norime išvardinti visus narius atskiriant juos kableliais: (pvz: 1, 2, 3), tačiau nenorime turėti 
+// nereikalingų kablelių pradžioje (pvz: , 1, 2, 3), bei pabaigoje (pvz: 1, 2, 3, ). 
+// Kaip tai pasiekti? Atlikite su paprastu indeksiniu masyvu bei su asociatyviuoju masyvu.
+
 print('Visų reikšmių pasiekimas / išvardinimas → for()' . '<br>' . '<pre>');
-    for($i = 0; $i < count(array_keys($arr_Weights)); ++$i) {
-      // get assoc array key, using an index
-      // $arr_Weights[key]
-      // array_keys($arr_Weights) 
-      echo array_keys($arr_Weights)[$i] . '->' . $arr_Weights[array_keys($arr_Weights)[$i]] . ' ';
+    for($i = 0; $i < count(array_keys($arr_Weights)); $i++) {
+        if ($i < (count(array_keys($arr_Weights))-1))
+            echo array_keys($arr_Weights)[$i] . '->' . $arr_Weights[array_keys($arr_Weights)[$i]] . ', ';
+        else 
+            echo array_keys($arr_Weights)[$i] . '->' . $arr_Weights[array_keys($arr_Weights)[$i]];
     }
     print('</pre><br>');
+// Kaip reiktų išvardinti kas antrą masyvo narį?
+print('Kas antro nario reikšmių pasiekimas <br>' . '<pre>');
+    for($i = 0; $i < count(array_keys($arr_Weights)); $i+=2) {
+        echo array_keys($arr_Weights)[$i] . '->' . $arr_Weights[array_keys($arr_Weights)[$i]] . ' ';
+    }
+
+print('</pre><br>');
 
 
 // 2.1. min
@@ -127,6 +146,53 @@ for($i=0; $i < count($my_array3); $i++) {           //Narių kiekis masyve (jo i
         print($my_array3[$i][$j]);print('<br>');
     }
 } 
+// 3. ** Iš n-dimensinio skaičių masyvo, kuriame skaičiai nesikartoja pagaminkite 1-D masyvą, su išrikuotais elementais 
+// (pradėkite nuo nerikiuotų) (array flattening), pvz: [[5,3],[1,2,8]] → [1,2,3,5,8]
+print ('FLATTENING<br>');
+// $a = array(1,2,array(3,4, array(5,6,7), 8), 9);
+$a = [[5,3],[1,2,8]];
 
+$it = new RecursiveIteratorIterator(new RecursiveArrayIterator($a));
+foreach($it as $v) {
+  echo $v, " ";
+
+}
+
+
+$multi=[10,9,[5,4],[6,7],[3,2],[8,1]];                               // declare multi-dim array
+array_walk_recursive($multi,function($v)use(&$flat){$flat[]=$v;});   // store values
+sort($flat);                                                         // sort
+
+foreach($flat as $v){                                                // display
+    echo "<center>$v</center><br>";
+}
+
+
+print ('<br>FLATTENING string array in ul<br>');
+function flatten($array) {
+    if (!is_array($array)) {
+        // nothing to do if it's not an array
+        return array($array);
+    }
+
+    $result = array();
+    foreach ($array as $value) {
+        // explode the sub-array, and add the parts
+        $result = array_merge($result, flatten($value));
+    }
+
+    return $result;
+}
+
+
+$arr = array('foo', array('nobody', 'expects', array('another', 'level'), 'the', 'Spanish', 'Inquisition'), 'bar');
+echo '<ul>';
+foreach (flatten($arr) as $value) {
+    echo '<li>', $value, '</li>';
+}
+echo '</ul>';
 
 ?>
+<a href="../index.php">Back to Main page</a></div>
+</body>
+</html>
