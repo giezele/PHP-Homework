@@ -150,9 +150,9 @@ for($i=0; $i < count($my_array3); $i++) {           //Narių kiekis masyve (jo i
 // (pradėkite nuo nerikiuotų) (array flattening), pvz: [[5,3],[1,2,8]] → [1,2,3,5,8]
 print ('FLATTENING<br>');
 // $a = array(1,2,array(3,4, array(5,6,7), 8), 9);
-$a = [[5,3],[1,2,8]];
+$a = [[5,3],[1,2,8]];                                               // declare multi-dim array
 
-$it = new RecursiveIteratorIterator(new RecursiveArrayIterator($a));
+$it = new RecursiveIteratorIterator(new RecursiveArrayIterator($a));    //Flat no sort
 foreach($it as $v) {
   echo $v, " ";
 
