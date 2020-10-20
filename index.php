@@ -12,7 +12,12 @@
 
     <a href="Paskaita3\index.php">Paskaita3 --> Masyvai</a><br>
 
-    
+    <a href="LoginSessions\index.php">Login --> Login Sessions 3 files</a><br>
+
+    <a href="FileBrowser\index.php">Web File Browser</a><br>
+
+    <a href="FileActions\index.php">Web File Actions</a><br>
+
     
 </body>
 </html>

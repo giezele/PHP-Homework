@@ -13,7 +13,7 @@
 
     <form method="POST" action="./login.php">
         <label for="favplanet">Enter your fav planet</label>
-        <input type="text" name="favplanet">
+        <input type="text" name="favplanet" placeholder="mars">
         <label for="passw"></label>
         <input type="password" name="passw">
         <input type="submit" value="submit button">

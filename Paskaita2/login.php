@@ -8,7 +8,8 @@
 <body>
 <?php
     // requestas su POST
-        // print_r($_POST['favplanet']);
+        print_r($_POST['favplanet']);
+        print("<br>");
         if($_POST['favplanet'] == "mars"){
             print('Hello ' . $_POST['favplanet'] . '!');
         } else {
